@@ -36,7 +36,7 @@ function modeMeta(mode: QuizMode) {
   };
 }
 
-export function InteractiveMap() {
+function InteractiveMap() {
   const [mode, setMode] = useState<QuizMode>("regions");
   const [quiz, setQuiz] = useState<QuizState>(() => createQuiz("regions", regions));
   const [feedback, setFeedback] = useState<Feedback>(null);
@@ -83,7 +83,6 @@ export function InteractiveMap() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-12">
-      {/* Sidebar controls */}
       <aside className="lg:col-span-4 space-y-5">
         <QuizControls
           modes={modes}
@@ -139,7 +138,6 @@ export function InteractiveMap() {
         <QuizFeedback feedback={feedback} />
       </aside>
 
-      {/* Map */}
       <div className="lg:col-span-8">
         <div className="relative overflow-hidden rounded-3xl border-2 border-foreground bg-card shadow-stamp-lg">
           <div className="flex items-center justify-between border-b-2 border-foreground bg-accent px-5 py-3">
@@ -162,7 +160,6 @@ export function InteractiveMap() {
               role="img"
               aria-label={`Map for ${modeMeta(mode).label}`}
             >
-              {/* Decorative latitude / longitude lines */}
               <g stroke="currentColor" className="text-foreground/10" strokeWidth="1">
                 {[100, 200, 300, 400, 500].map((y) => (
                   <line key={`h${y}`} x1="0" y1={y} x2="800" y2={y} />
@@ -210,7 +207,6 @@ export function InteractiveMap() {
                 );
               })}
 
-              {/* Hovered label */}
               {hoveredId &&
                 (() => {
                   const f = features.find((x) => x.id === hoveredId);
@@ -260,3 +256,4 @@ export function InteractiveMap() {
 }
 
 export default InteractiveMap;
+export { InteractiveMap };
