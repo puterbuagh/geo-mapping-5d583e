@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Editorial cartographic palette — parchment, ink, moss, terracotta, ochre */
+    --background: 42 38% 96%;
+    --foreground: 220 35% 12%;
+
+    --card: 40 30% 99%;
+    --card-foreground: 220 35% 12%;
+
+    --popover: 40 30% 99%;
+    --popover-foreground: 220 35% 12%;
+
+    --primary: 14 78% 48%;
+    --primary-foreground: 42 50% 97%;
+
+    --secondary: 145 32% 38%;
+    --secondary-foreground: 42 50% 97%;
+
+    --muted: 40 24% 90%;
+    --muted-foreground: 220 15% 38%;
+
+    --accent: 38 92% 62%;
+    --accent-foreground: 220 35% 12%;
+
+    --destructive: 0 72% 48%;
+    --destructive-foreground: 42 50% 97%;
+
+    --success: 145 55% 35%;
+    --success-foreground: 42 50% 97%;
+
+    --border: 220 18% 82%;
+    --input: 220 18% 82%;
+    --ring: 14 78% 48%;
+
+    --radius: 0.75rem;
+
+    --font-display: "Fraunces", "Times New Roman", serif;
+    --font-body: "Work Sans", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  .dark {
+    --background: 220 30% 8%;
+    --foreground: 42 38% 94%;
+    --card: 220 28% 11%;
+    --card-foreground: 42 38% 94%;
+    --popover: 220 28% 11%;
+    --popover-foreground: 42 38% 94%;
+    --primary: 14 82% 58%;
+    --primary-foreground: 220 30% 8%;
+    --secondary: 145 38% 48%;
+    --secondary-foreground: 220 30% 8%;
+    --muted: 220 20% 18%;
+    --muted-foreground: 42 15% 70%;
+    --accent: 38 92% 62%;
+    --accent-foreground: 220 30% 8%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 42 38% 94%;
+    --success: 145 55% 50%;
+    --success-foreground: 220 30% 8%;
+    --border: 220 18% 24%;
+    --input: 220 18% 24%;
+    --ring: 14 82% 58%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    font-family: var(--font-body);
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "ss01", "cv11";
+    background-image:
+      radial-gradient(ellipse at top left, hsl(38 92% 62% / 0.18), transparent 55%),
+      radial-gradient(ellipse at bottom right, hsl(145 32% 38% / 0.14), transparent 55%);
+    background-attachment: fixed;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+@layer utilities {
+  .bg-grain {
+    position: relative;
+  }
+  .bg-grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .shadow-stamp {
+    box-shadow: 4px 4px 0 0 hsl(var(--foreground));
+  }
+
+  .shadow-stamp-lg {
+    box-shadow: 6px 6px 0 0 hsl(var(--foreground));
+  }
+
+  .shadow-stamp-sm {
+    box-shadow: 2px 2px 0 0 hsl(var(--foreground));
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 1px hsl(var(--foreground));
+  }
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(0.9); opacity: 0.9; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.animate-pulse-ring {
+  animation: pulseRing 1.2s ease-out infinite;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.animate-wiggle {
+  animation: wiggle 0.35s ease-in-out 2;
+}
+
+@keyframes stampIn {
+  0% { transform: scale(1.4) rotate(-8deg); opacity: 0; }
+  60% { transform: scale(0.95) rotate(-2deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-2deg); opacity: 1; }
+}
+
+.animate-stamp-in {
+  animation: stampIn 0.5s ease-out forwards;
+}
